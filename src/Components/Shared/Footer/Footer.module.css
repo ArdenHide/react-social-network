@@ -1,0 +1,19 @@
+/* Footer */
+.footer {
+    flex: 0 0 auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    background-color: #424242;
+    color: #fff;
+    font-size: calc(10px + 2vmin);
+}
+
+.danger_text {
+    color: red;
+}
+
+.muted_text {
+    opacity: .5;
+}
