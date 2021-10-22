@@ -2,6 +2,7 @@ import React from "react";
 import Post from "./Post/Post";
 import { MDBInput } from 'mdb-react-ui-kit';
 import { MDBBtn } from 'mdb-react-ui-kit';
+import { addPostActionCreator, onChangePostInputActionCreator } from "../../../Redux/Store";
 
 function MyPosts(props) {
     let postsElements = props.postsData.map(p =>
@@ -18,20 +19,20 @@ function MyPosts(props) {
     function clickAddPost() {
         let title = newPostTitle.current.value;
         let text = newPostText.current.value;
-        props.addPost(title, text);
+        props.dispatch(addPostActionCreator(title, text));
     }
 
     function onChangePostTitle() {
         let title = newPostTitle.current.value;
         let text = newPostText.current.value;
         console.log(title + text);
-        props.updatePostInput(title, text);
+        props.dispatch(onChangePostInputActionCreator(title, text));
     }
     function onChangePostText() {
         let title = newPostTitle.current.value;
         let text = newPostText.current.value;
         console.log(title + text);
-        props.updatePostInput(title, text);
+        props.dispatch(onChangePostInputActionCreator(title, text));
     }
     return (
         <div className="container-fluid p-0">

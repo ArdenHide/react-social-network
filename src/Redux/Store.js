@@ -1,3 +1,6 @@
+const ADD_POST = 'ADD-POST';
+const UPDATE_POST_INPUT = 'UPDATE-POST-INPUT';
+
 let store = {
     _state: {
         profilePage: {
@@ -34,15 +37,10 @@ let store = {
             ]
         }
     },
-    getState() {
-        return this._state;
-    },
-
-    _RerenderDOM(){ },
-
-    addPost(postTitle, postText) {
+    _RerenderDOM() { },
+    _addPost(postTitle, postText) {
         let newPost = {
-            id: this.getState().profilePage.postsData.length+1,
+            id: this.getState().profilePage.postsData.length + 1,
             title: postTitle,
             text: postText,
             likeCount: 0
@@ -50,14 +48,38 @@ let store = {
         this.getState().profilePage.postsData.push(newPost);
         this._RerenderDOM(this.getState());
     },
-    updatePostInput(postTitle, postText) {
+    _updatePostInput(postTitle, postText) {
         this.getState().profilePage.newPostTitle = postTitle;
         this.getState().profilePage.newPostText = postText;
         this._RerenderDOM(this.getState());
     },
+
+    getState() {
+        return this._state;
+    },
     subscribeToRerenderDOM(observer) {
         this._RerenderDOM = observer;
+    },
+
+    dispatch(action) {
+        if (action.type === ADD_POST) {
+            this._addPost(action.postTitle, action.postText);
+        }
+        else if (action.type === UPDATE_POST_INPUT) {
+            this._updatePostInput(action.postTitle, action.postText)
+        }
     }
+}
+
+export function addPostActionCreator(title, text) {
+    return {
+        type: 'ADD-POST', postTitle: title, postText: text
+    };
+}
+export function onChangePostInputActionCreator(title, text) {
+    return {
+        type: 'UPDATE-POST-INPUT', postTitle: title, postText: text
+    };
 }
 
 window.store = store;
