@@ -1,21 +1,24 @@
+import { React } from 'react';
+import { RerenderDOM } from '../Render'
+
 let state = {
     profilePage: {
         postsData: [
             {
                 id: 1,
-                img_path: "https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__480.jpg",
                 title: "Post 1",
                 text: "С другой стороны понимание сущности ресурсосберегающих технологий требует анализа укрепления демократической системы.",
-                like_count: 3
+                likeCount: 3
             },
             {
                 id: 2,
-                img_path: "https://docs.microsoft.com/ru-ru/windows/apps/design/controls/images/image-licorice.jpg",
                 title: "Post 2",
                 text: "С другой стороны понимание сущности ресурсосберегающих технологий требует анализа укрепления демократической системы.",
-                like_count: 33
+                likeCount: 33
             }
         ],
+        newPostTitle: 'Title',
+        newPostText: 'Post text'
     },
     dialogsPage: {
         dialogsData: [
@@ -32,6 +35,23 @@ let state = {
             { id: 5, message: "Привет Стасян" },
         ]
     }
+}
+
+export function addPost(postTitle, postText) {
+    let newPost = {
+        id: state.profilePage.postsData.length+1,
+        title: postTitle,
+        text: postText,
+        likeCount: 0
+    };
+    state.profilePage.postsData.push(newPost);
+    RerenderDOM(state);
+}
+
+export function updatePostInput(postTitle, postText) {
+    state.profilePage.newPostTitle = postTitle;
+    state.profilePage.newPostText = postText;
+    RerenderDOM(state);
 }
 
 export default state;

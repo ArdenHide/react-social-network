@@ -1,9 +1,16 @@
+import React from "react";
+
 function ProfileInfo() {
     return (
         <div className="row">
             <div className="col-12">
-                <img className="img-fluid w-100" src="https://helpx.adobe.com/content/dam/help/en/photoshop/using/convert-color-image-black-white/jcr_content/main-pars/before_and_after/image-before/Landscape-Color.jpg" alt="background" />
+                <div className="bg-dark py-2 mb-4">
+                    <div className="container text-white">
+                        <h1 className="fs-1">My Post</h1>
+                    </div>
+                </div>
                 <p>ava + desc</p>
+                <hr />
             </div>
         </div>
     );
