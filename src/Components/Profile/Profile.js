@@ -1,8 +1,6 @@
 import React from "react";
 import MyPosts from "./MyPosts/MyPosts";
 import ProfileInfo from "./ProfileInfo/ProfileInfo";
-import { addPost } from '../../Redux/State';
-import { updatePostInput } from '../../Redux/State';
 
 function Profile(props) {
     return (
@@ -10,7 +8,7 @@ function Profile(props) {
             <ProfileInfo />
             <MyPosts
                 postsData={props.data.postsData} newPostTitle={props.data.newPostTitle} newPostText={props.data.newPostText}
-                addPost={addPost} updatePostInput={updatePostInput} />
+                addPost={props.addPost} updatePostInput={props.updatePostInput} />
         </div>
     );
 }

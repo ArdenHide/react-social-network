@@ -15,7 +15,7 @@ function MyPosts(props) {
 
     let newPostTitle = React.createRef();
     let newPostText = React.createRef();
-    function addPost() {
+    function clickAddPost() {
         let title = newPostTitle.current.value;
         let text = newPostText.current.value;
         props.addPost(title, text);
@@ -33,7 +33,6 @@ function MyPosts(props) {
         console.log(title + text);
         props.updatePostInput(title, text);
     }
-
     return (
         <div className="container-fluid p-0">
             <div className="bg-dark py-2 mb-2">
@@ -57,7 +56,7 @@ function MyPosts(props) {
                 {/* <MDBInput labelRef={newPostTitle} label='Post message' aria-describedby='textAreaLabel' textarea rows={4} /> */}
             </div>
             <div className="d-grid gap-2 d-md-flex justify-content-md-start mb-4">
-                <MDBBtn onClick={addPost}>Create post</MDBBtn>
+                <MDBBtn onClick={clickAddPost}>Create post</MDBBtn>
             </div>
 
             <div className="row">
