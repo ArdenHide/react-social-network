@@ -16,7 +16,7 @@ function App(props) {
                 <main className="row m-0">
                     <Aside />
                     <Route path='/Profile' render={ () => <Profile data={props.state.profilePage} dispatch={props.dispatch} />} />
-                    <Route path='/Dialogs' render={ () => <Dialogs data={props.state.dialogsPage} />} />
+                    <Route path='/Dialogs' render={ () => <Dialogs data={props.state.dialogsPage} dispatch={props.dispatch} />} />
                 </main>
                 <Footer />
             </BrowserRouter>

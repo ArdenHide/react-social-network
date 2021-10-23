@@ -1,5 +1,7 @@
 const ADD_POST = 'ADD-POST';
 const UPDATE_POST_INPUT = 'UPDATE-POST-INPUT';
+const UPDATE_NEW_MESSAGE_INPUT = 'UPDATE-NEW-MESSAGE-INPUT';
+const SEND_MESSAGE = 'SEND-MESSAGE';
 
 let store = {
     _state: {
@@ -34,7 +36,8 @@ let store = {
                 { id: 3, message: "Привет Яна" },
                 { id: 4, message: "Привет Аня" },
                 { id: 5, message: "Привет Стасян" },
-            ]
+            ],
+            newMessage: 'new message'
         }
     },
     _RerenderDOM() { },
@@ -53,6 +56,19 @@ let store = {
         this.getState().profilePage.newPostText = postText;
         this._RerenderDOM(this.getState());
     },
+    _updateNewMessageInput(messageText) {
+        this.getState().dialogsPage.newMessage = messageText;
+        this._RerenderDOM(this.getState());
+    },
+    _sendMessage(messageText) {
+        let newMessageItem = {
+            id: this.getState().dialogsPage.messagesData.length + 1,
+            message: messageText
+        };
+        this.getState().dialogsPage.messagesData.push(newMessageItem);
+        this._RerenderDOM(this.getState());
+    },
+
 
     getState() {
         return this._state;
@@ -66,7 +82,13 @@ let store = {
             this._addPost(action.postTitle, action.postText);
         }
         else if (action.type === UPDATE_POST_INPUT) {
-            this._updatePostInput(action.postTitle, action.postText)
+            this._updatePostInput(action.postTitle, action.postText);
+        }
+        else if (action.type === UPDATE_NEW_MESSAGE_INPUT) {
+            this._updateNewMessageInput(action.newMessage);
+        }
+        else if (action.type === SEND_MESSAGE) {
+            this._sendMessage(action.newMessage);
         }
     }
 }
@@ -79,6 +101,16 @@ export function addPostActionCreator(title, text) {
 export function onChangePostInputActionCreator(title, text) {
     return {
         type: 'UPDATE-POST-INPUT', postTitle: title, postText: text
+    };
+}
+export function updateNewMessageInputActionCreator(message) {
+    return {
+        type: 'UPDATE-NEW-MESSAGE-INPUT', newMessage: message
+    };
+}
+export function sendMessageActionCreator(message) {
+    return {
+        type: 'SEND-MESSAGE', newMessage: message
     };
 }
 
