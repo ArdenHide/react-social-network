@@ -1,7 +1,5 @@
-const ADD_POST = 'ADD-POST';
-const UPDATE_POST_INPUT = 'UPDATE-POST-INPUT';
-const UPDATE_NEW_MESSAGE_INPUT = 'UPDATE-NEW-MESSAGE-INPUT';
-const SEND_MESSAGE = 'SEND-MESSAGE';
+import ProfileReducer from './ProfileReducer';
+import DialogsReducer from './DialogsReducer';
 
 let store = {
     _state: {
@@ -41,34 +39,6 @@ let store = {
         }
     },
     _RerenderDOM() { },
-    _addPost(postTitle, postText) {
-        let newPost = {
-            id: this.getState().profilePage.postsData.length + 1,
-            title: postTitle,
-            text: postText,
-            likeCount: 0
-        };
-        this.getState().profilePage.postsData.push(newPost);
-        this._RerenderDOM(this.getState());
-    },
-    _updatePostInput(postTitle, postText) {
-        this.getState().profilePage.newPostTitle = postTitle;
-        this.getState().profilePage.newPostText = postText;
-        this._RerenderDOM(this.getState());
-    },
-    _updateNewMessageInput(messageText) {
-        this.getState().dialogsPage.newMessage = messageText;
-        this._RerenderDOM(this.getState());
-    },
-    _sendMessage(messageText) {
-        let newMessageItem = {
-            id: this.getState().dialogsPage.messagesData.length + 1,
-            message: messageText
-        };
-        this.getState().dialogsPage.messagesData.push(newMessageItem);
-        this._RerenderDOM(this.getState());
-    },
-
 
     getState() {
         return this._state;
@@ -78,18 +48,9 @@ let store = {
     },
 
     dispatch(action) {
-        if (action.type === ADD_POST) {
-            this._addPost(action.postTitle, action.postText);
-        }
-        else if (action.type === UPDATE_POST_INPUT) {
-            this._updatePostInput(action.postTitle, action.postText);
-        }
-        else if (action.type === UPDATE_NEW_MESSAGE_INPUT) {
-            this._updateNewMessageInput(action.newMessage);
-        }
-        else if (action.type === SEND_MESSAGE) {
-            this._sendMessage(action.newMessage);
-        }
+        this._state.profilePage = ProfileReducer(this._state.profilePage, action);
+        this._state.dialogsPage = DialogsReducer(this._state.dialogsPage, action);
+        this._RerenderDOM(this._state);
     }
 }
 
