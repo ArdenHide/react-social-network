@@ -55,24 +55,16 @@ let store = {
 }
 
 export function addPostActionCreator(title, text) {
-    return {
-        type: 'ADD-POST', postTitle: title, postText: text
-    };
+    return { type: 'ADD-POST', postTitle: title, postText: text };
 }
 export function onChangePostInputActionCreator(title, text) {
-    return {
-        type: 'UPDATE-POST-INPUT', postTitle: title, postText: text
-    };
+    return { type: 'UPDATE-POST-INPUT', postTitle: title, postText: text };
 }
 export function updateNewMessageInputActionCreator(message) {
-    return {
-        type: 'UPDATE-NEW-MESSAGE-INPUT', newMessage: message
-    };
+    return { type: 'UPDATE-NEW-MESSAGE-INPUT', newMessage: message };
 }
 export function sendMessageActionCreator(message) {
-    return {
-        type: 'SEND-MESSAGE', newMessage: message
-    };
+    return { type: 'SEND-MESSAGE', newMessage: message };
 }
 
 window.store = store;
